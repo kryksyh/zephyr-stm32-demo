@@ -13,6 +13,8 @@ jobs:
       matrix:
         board:
          - nucleo_f207zg
+         - nucleo_f412zg
+         - nucleo_f756zg
     steps:
     - name: Update PATH for west
       run: |
