@@ -34,6 +34,11 @@ jobs:
         app-path: app
         toolchains: arm-zephyr-eabi
         # sdk-version: 0.16.8
+    - name: Prepare Zephyr Workspace
+      shell: bash
+      run: |
+        west config manifest.project-filter -- +nanopb
+        west update
 
     - name: Build Application
       working-directory: app
