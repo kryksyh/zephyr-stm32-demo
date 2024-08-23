@@ -1,0 +1,26 @@
+{
+    "zephyr_base": "${env:ZEPHYR_BASE}",
+    "board": "nucleo_f207zg",
+    "target": "stm32f207zg",
+    
+    "C_Cpp.default.compilerPath": "${config:zephyr_base}/zephyr-sdk-0.16.8/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc.exe",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "stddef.h": "c",
+        "xiosbase": "c",
+        "unistd.h": "c",
+        "ctype.h": "c",
+        "host_interface.h": "c",
+        "message.pb.h": "c",
+        "usb_device.h": "c",
+        "kernel.h": "c",
+        "shell_uart.h": "c",
+        "shell.h": "c",
+        "pb_decode.h": "c",
+        "conf.h": "c",
+        "atomic": "c"
+    },
+    "cortex-debug.variableUseNaturalFormat": false,
+}

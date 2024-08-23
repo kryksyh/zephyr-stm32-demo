@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+enum RequestType {
+    ConfigSensor = 0;
+    ReadData = 1;
+    Toggle = 2;
+}
+
+enum ConfigSensorCommand {
+    Enable = 0;
+    Disable = 1;
+    SetConfig = 2;
+}
+
+message ConfigSensorRequest {
+    uint32 sensor_id = 1;
+    ConfigSensorCommand command = 2;
+    optional uint32 interval = 3;
+    optional int32 offset = 4;
+    optional float coef = 5;
+}
+
+message ReadDataRequest {
+    uint32 sensor_id = 1;
+}
+
+message Request {
+    RequestType type = 1;
+    oneof request {
+        ReadDataRequest read_data = 2;
+        ConfigSensorRequest config = 3;
+    }
+}
+
+message Temperature {
+    uint32 sensor_id = 1;
+    float data = 2;
+}
+
+message Response {
+    Status status = 1;
+    RequestType type = 2;
+    optional Temperature temperature = 3;
+}
+
+enum Status {
+    SUCCESS = 0;
+    INVALID_SENSOR_ID = 1;
+    SENSOR_OFFLINE = 2;
+    GENERAL_FAILURA = 3;
+}

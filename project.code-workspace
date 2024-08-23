@@ -1,0 +1,13 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "at_link_serial": "7769593300C0636C0A970D02",
+        "zephyr_base": "F:/zephyr",
+        "board": "nucleo_f207zg",
+        "target": "stm32f207zg"
+    }
+}
