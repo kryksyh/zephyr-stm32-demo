@@ -41,7 +41,20 @@ jobs:
         west update
 
     - name: Build Application
+      id: build
       working-directory: app
       shell: bash
       run: |
         west build -b ${{ matrix.board }}
+        ELF_NAME=zephyr.elf
+        HEX_NAME=zephyr.hex
+        ART_PATH="app/build/zephyr"
+        echo "HEX_NAME=${HEX_NAME}" >> $GITHUB_OUTPUT
+        echo "ELF_NAME=${ELF_NAME}" >> $GITHUB_OUTPUT
+        echo "ART_PATH=${ART_PATH}" >> $GITHUB_OUTPUT
+
+    - name: "Artifact upload: tarball"
+      uses: actions/upload-artifact@master
+      with:
+        name: ${{ steps.build.outputs.HEX_NAME }}
+        path: ${{ steps.build.outputs.ART_PATH }}
