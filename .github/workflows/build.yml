@@ -49,8 +49,7 @@ jobs:
         ELF_NAME=zephyr.elf
         HEX_NAME=zephyr.hex
         ART_PATH="app/build/zephyr"
-        echo "HEX_NAME=${HEX_NAME}" >> $GITHUB_OUTPUT
-        echo "ELF_NAME=${ELF_NAME}" >> $GITHUB_OUTPUT
+        echo "HEX_NAME=${{ matrix.board }}" >> $GITHUB_OUTPUT
         echo "ART_PATH=${ART_PATH}" >> $GITHUB_OUTPUT
 
     - name: "Artifact upload: tarball"
