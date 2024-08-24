@@ -1,10 +1,18 @@
 /**
+ * temp_reader
+ *
+ * Copyright (c) [2024] [DM]
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
+ */
+
+/*
  * Configuration provider
  *
  * Depending on the requirements of the project could interface
- * onboard flash/eeprom, request the data from host or anything else
+ * onboard flash/eeprom, request the data from the host or anything else
  *
- * here we just fallback to static default config
+ * for now we just fallback to the static default config
  *
  */
 #pragma once
@@ -17,6 +25,7 @@ typedef struct {
     uint32_t interval;
     int32_t cal_offset;
     float cal_coef;
+    uint32_t _padding;
 } sensor_conf_t;
 
 bool conf_init();

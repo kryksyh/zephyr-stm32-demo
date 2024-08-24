@@ -7,20 +7,4 @@
     "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
 
     "cmake.configureOnOpen": false,
-    "files.associations": {
-        "stddef.h": "c",
-        "xiosbase": "c",
-        "unistd.h": "c",
-        "ctype.h": "c",
-        "host_interface.h": "c",
-        "message.pb.h": "c",
-        "usb_device.h": "c",
-        "kernel.h": "c",
-        "shell_uart.h": "c",
-        "shell.h": "c",
-        "pb_decode.h": "c",
-        "conf.h": "c",
-        "atomic": "c"
-    },
-    "cortex-debug.variableUseNaturalFormat": false,
 }

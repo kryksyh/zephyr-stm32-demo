@@ -1,3 +1,11 @@
+/**
+ * temp_reader
+ *
+ * Copyright (c) [2024] [DM]
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
+ */
+
 #include "app.h"
 
 #include <math.h>
@@ -17,16 +25,18 @@
 
 LOG_MODULE_REGISTER(app);
 
+// this is a workaround to keep zephyr thread related code outside
 #define THREAD_STACK_SIZE 1024
-
 static uint8_t sensor_thread_stack[THREAD_STACK_SIZE];
 
+// Functions providing text-based interface
 static int read_sensor_text(int argc, const char **argv);
 static int enable_sensor_text(int argc, const char **argv);
 static int disable_sensor_text(int argc, const char **argv);
 static int config_sensor_text(int argc, const char **argv);
 static int toggle_interface_mode_text(int argc, const char **argv);
 
+// Functions providing binare-based-interface
 static int read_sensor_bin(const Request *request);
 static int config_sensor_bin(const Request *request);
 static int toggle_interface_mode_bin(const Request *request);
@@ -40,6 +50,7 @@ typedef struct {
     text_command_handler_t handler;
 } text_command_t;
 
+// Registringn  supported text commands
 static text_command_t text_commands[] = {
     { "read", "Read sensor data. Ex: app read 1 2 3", read_sensor_text },
     { "enable", "Enable sensors. Ex: app enable 1 2 3", enable_sensor_text },
@@ -53,12 +64,14 @@ typedef struct {
     bin_command_handler_t handler;
 } bin_command_t;
 
+// Registring supported binary commands
 static bin_command_t bin_commands[] = {
     { RequestType_Toggle, toggle_interface_mode_bin },
     { RequestType_ReadData, read_sensor_bin },
     { RequestType_ConfigSensor, config_sensor_bin },
 };
 
+// Dispatches the incoming text command to a dedicated handler
 int process_host_text(int argc, const char **argv)
 {
     int res = -1;
@@ -85,6 +98,7 @@ int process_host_text(int argc, const char **argv)
     return res;
 }
 
+// Dispatches the incoming binary command to a dedicated header
 int process_host_bin(const uint8_t *data, size_t len)
 {
     Request request      = Request_init_zero;
@@ -115,28 +129,35 @@ int process_host_bin(const uint8_t *data, size_t len)
 
 void app_init()
 {
+    // Do low-level hardware initialization
+    // In zephyr this would probably go to pre-main board init
     low_level_init();
 
+    // Initializing communications
     host_interface_init();
 
+    // Initializing configuration
     conf_init();
 
+    // Now that we have a config, starting up sensors, and polling thread
     sensor_init();
-
     osal_start_thread(sensor_poll, NULL, sensor_thread_stack, sizeof sensor_thread_stack, 5);
 
-    // setup host interface
+    // setup host interface callbacks
     host_set_text_cb(process_host_text);
     host_set_bin_cb(process_host_bin);
 }
 
 void app_run()
 {
+    // Nothing to do, so lets spin around
     while (true) {
         osal_sleep_ms(1000);
     }
 }
 
+// From here and below the code parsing and responding to interface command
+// I belive that the code is straightforward
 static int read_sensor_text(int argc, const char **argv)
 {
     host_send_text("Read command received\n");
@@ -150,7 +171,8 @@ static int read_sensor_text(int argc, const char **argv)
         if (sensor_id < 0 || sensor_id >= MAX_SENSOR_COUNT) {
             continue;
         }
-        // to skip floating formatting, lets do it manually
+        // to skip including huge-ass floating formatting code, lets
+        // manually convert float to a string
         float temp = sensor_get_temp(sensor_id);
         if (isnan(temp)) {
             host_send_text("\tSensor[%zd] is offline\n", sensor_id);
@@ -340,15 +362,14 @@ static int read_sensor_bin(const Request *request)
     response.type = request->type;
 
     if (sensor_id >= 0 && sensor_id < MAX_SENSOR_COUNT) {
-        
         if (!sensor_get_enabled(sensor_id)) {
             response.status = Status_SENSOR_OFFLINE;
         }
         else {
-            int32_t temp = sensor_get_temp(request->request.read_data.sensor_id);
-            response.has_temperature = true;
+            int32_t temp                   = sensor_get_temp(request->request.read_data.sensor_id);
+            response.has_temperature       = true;
             response.temperature.sensor_id = sensor_id;
-            response.temperature.data = temp;
+            response.temperature.data      = temp;
         }
     }
     else {

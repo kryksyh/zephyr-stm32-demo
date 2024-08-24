@@ -1,5 +1,14 @@
 /**
+ * temp_reader
  *
+ * Copyright (c) [2024] [DM]
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
+ */
+
+/*
+ * Wraps the host interface communications, providing platform independent
+ * functions
  */
 
 #pragma once

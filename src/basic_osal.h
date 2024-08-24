@@ -1,4 +1,12 @@
 /**
+ * temp_reader
+ *
+ * Copyright (c) [2024] [DM]
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
+ */
+
+/*
  * This is a naive an barely usable OSAL wrapper for Zephyr.
  * Logging subsystem was left out intentionally
  *

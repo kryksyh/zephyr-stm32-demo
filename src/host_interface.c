@@ -1,3 +1,10 @@
+/**
+ * temp_reader
+ *
+ * Copyright (c) [2024] [DM]
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
+ */
 #include "host_interface.h"
 
 #include <ctype.h>
@@ -40,6 +47,9 @@ static int cmd_version(const struct shell *sh, size_t argc, char **argv)
     return 0;
 }
 
+SHELL_CMD_ARG_REGISTER(version, NULL, "Show app version", cmd_version, 1, 0);
+SHELL_CMD_ARG_REGISTER(app, NULL, "App command", cmd_app, 1, 99);
+
 static void bypass_cb(const struct shell *sh, uint8_t *data, size_t len)
 {
     if (bin_cb_s) {
@@ -48,10 +58,6 @@ static void bypass_cb(const struct shell *sh, uint8_t *data, size_t len)
 
     return;
 }
-
-SHELL_CMD_ARG_REGISTER(version, NULL, "Show app version", cmd_version, 1, 0);
-
-SHELL_CMD_ARG_REGISTER(app, NULL, "App command", cmd_app, 1, 99);
 
 void host_set_text_cb(host_text_cb cb)
 {

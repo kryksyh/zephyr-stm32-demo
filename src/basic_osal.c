@@ -1,3 +1,10 @@
+/**
+ * temp_reader
+ *
+ * Copyright (c) [2024] [DM]
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
+ */
 #include "basic_osal.h"
 #include <stddef.h>
 #include <stdint.h>
@@ -21,6 +28,7 @@ int low_level_init()
 
 int osal_setup_timer(uint32_t time_ms, timer_cb cb)
 {
+    // TODO
     return 0;
 }
 
@@ -37,7 +45,9 @@ int osal_sleep_ms_until(uint32_t time_ms, void *sem)
     return ret;
 }
 
-struct k_sem _sem;
+// Thats correct, we can only create a single semaphore
+// no time
+static struct k_sem _sem;
 void *osal_sem_create()
 {
     struct k_sem *sem = &_sem;
@@ -78,13 +88,11 @@ void *osal_start_thread(
 {
     static struct k_thread thread_data;
 
-    // Ensure the requested stack size meets the minimum size requirement
     if (stack_size < STACK_SIZE) {
         printk("Stack size is too small.\n");
         return NULL;
     }
 
-    // Create and start the thread
     k_thread_create(&thread_data,
                     stack0,
                     sizeof stack0,
@@ -96,6 +104,5 @@ void *osal_start_thread(
                     0,
                     K_NO_WAIT);
 
-    // Return a pointer to the thread data
     return &thread_data;
 }

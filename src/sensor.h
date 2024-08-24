@@ -1,3 +1,15 @@
+/**
+ * temp_reader
+ *
+ * Copyright (c) [2024] [DM]
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
+ */
+
+/*
+ * Basic sensor interface module,
+ * Performs sensor polling and provides data in a thread-safe maner
+ */
 #pragma once
 #include <stdbool.h>
 #include <stddef.h>
