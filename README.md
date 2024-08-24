@@ -1,6 +1,6 @@
-[![Build](https://github.com/dmtr-makarenko/temp-sensor/actions/workflows/build.yml/badge.svg)](https://github.com/dmtr-makarenko/temp-sensor/actions/workflows/build.yml)
-![License](https://img.shields.io/github/license/dmtr-makarenko/temp-sensor)
-![Version](https://img.shields.io/github/v/release/dmtr-makarenko/temp-sensor)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/dmtr-makarenko/temp-sensor/build.yml?logo=github)
+[![GitHub License](https://img.shields.io/github/license/dmtr-makarenko/temp-sensor?cacheSeconds=1)](https://github.com/dmtr-makarenko/temp-sensor/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/release/dmtr-makarenko/temp-sensor)](https://github.com/dmtr-makarenko/temp-sensor/releases/tag/v1.0.0)
 
 # Temperature Reader
  
@@ -28,6 +28,9 @@ Run this command, replacing `<board_name>` with your target board (for example, 
 ```bash
 west build -b <board_name> path/to/the/repo
 ```
+
+> [!TIP]
+> If you have any issues during the build, please consult with [the build workflow](../../actions/workflows/build.yml) for this repo
 
 Replace `path/to/the/repo` with the folder where the application is located.
 
