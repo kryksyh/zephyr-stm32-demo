@@ -6,7 +6,7 @@
  
 ## Overview
 
-**Temperature Reader** is a sample Zephyr application. It simulates reading temperatures and provides a basic serial interface to communicate with the device.
+**Temperature Reader** is a sample Zephyr application that simulates reading temperatures and provides a basic serial interface for communicating with the device.
 
 ## Prerequisites
 
@@ -29,16 +29,16 @@ Run this command, replacing `<board_name>` with your target board (for example, 
 west build -b <board_name> path/to/the/repo
 ```
 
+Replace `path/to/the/repo` with the folder where the application is located.
+
 > [!TIP]
 > If you have any issues during the build, please consult with [the build workflow](../../actions/workflows/build.yml) for this repo
-
-Replace `path/to/the/repo` with the folder where the application is located.
 
 ## Usage
 The application supports two modes: text mode and binary mode. In text mode, you can interact with the device using simple commands. In binary mode, you use Protocol Buffers for more complex communication.
 
 ### Text Mode
-To use the device in text mode, you need a terminal application like minicom. Follow these steps:
+To use the device in text mode, you need a terminal application like `minicom`. Follow these steps:
 
 1. Connect to the device using minicom:
 
@@ -64,7 +64,7 @@ minicom -c on -D /dev/ttyACM0
 ### Binary Mode
 To use the device in binary mode, you send and receive messages using protobuf. Here’s how:
 
-1. Use protoc with the message.proto file to encode commands and send them to the device.
+1. Use `protoc` with the message.proto file to encode commands and send them to the device.
 
 2. Example commands:
 
@@ -78,8 +78,8 @@ echo -e "type: ReadData read_data:{sensor_id: 0}" | protoc --encode=Request mess
 ```
 dd if=/dev/ttyACM0 bs=1 count=9 status=none | protoc --decode Response message.proto
 ```
-
-> Please note that due to limitations of this approach i have to know the amount to data to read beforehand (note `count=9` above), which greatly impact on its usefulness.
+> [!IMPORTANT]
+> Please note that due to this approach's limitations, you must know the amount of data to read beforehand (note `count=9` above), greatly impacting its usefulness.
 
 #### Binary mode demo
 
