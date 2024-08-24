@@ -1,3 +1,7 @@
+[![Build](https://github.com/dmtr-makarenko/temp-sensor/actions/workflows/build.yml/badge.svg)](https://github.com/dmtr-makarenko/temp-sensor/actions/workflows/build.yml)
+![License](https://img.shields.io/github/license/dmtr-makarenko/temp-sensor)
+![Version](https://img.shields.io/github/v/release/dmtr-makarenko/temp-sensor)
+
 # Temperature Reader
  
 ## Overview
