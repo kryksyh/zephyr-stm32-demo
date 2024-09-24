@@ -1,6 +1,6 @@
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/dmtr-makarenko/temp-sensor/build.yml?logo=github)
-[![GitHub License](https://img.shields.io/github/license/dmtr-makarenko/temp-sensor?cacheSeconds=1)](https://github.com/dmtr-makarenko/temp-sensor/blob/main/LICENSE)
-[![Version](https://img.shields.io/github/v/release/dmtr-makarenko/temp-sensor)](https://github.com/dmtr-makarenko/temp-sensor/releases/tag/v1.0.0)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/kryksyh/zephyr-stm32-demo/build.yml?logo=github)
+[![GitHub License](https://img.shields.io/github/license/kryksyh/zephyr-stm32-demo?cacheSeconds=1)](https://github.com/kryksyh/zephyr-stm32-demo/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/release/kryksyh/zephyr-stm32-demo)](https://github.com/kryksyh/zephyr-stm32-demo/releases/tag/v1.0.0)
 
 # Temperature Reader
  
